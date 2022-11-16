@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import "antd/dist/antd.css";
+
 import {
   Steps,
   Row,
@@ -51,6 +52,7 @@ class App extends Component {
   state = {
     current: 0,
     showSubmit: false,
+    showTrend: false,
     enableBack: false,
     validateNumberStatus: "success",
     validateOptionStatus: "success",
@@ -64,29 +66,36 @@ class App extends Component {
       "https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js";
     script.async = true;
     script.innerHTML = JSON.stringify({
+      colorTheme: "light",
+      dateRange: "12M",
       showChart: true,
       locale: "en",
+      width: "700",
+      height: "500",
       largeChartUrl: "",
-      width: "100%",
-      height: "660",
-      plotLineColorGrowing: "rgba(33, 150, 243, 1)",
-      plotLineColorFalling: "rgba(33, 150, 243, 1)",
-      gridLineColor: "rgba(233, 233, 234, 1)",
-      scaleFontColor: "rgba(131, 136, 141, 1)",
-      belowLineFillColorGrowing: "rgba(5, 122, 205, 0.12)",
-      belowLineFillColorFalling: "rgba(5, 122, 205, 0.12)",
-      symbolActiveColor: "rgba(225, 239, 249, 1)",
+      isTransparent: false,
+      showSymbolLogo: true,
+      showFloatingTooltip: false,
+      plotLineColorGrowing: "rgba(41, 98, 255, 1)",
+      plotLineColorFalling: "rgba(41, 98, 255, 1)",
+      gridLineColor: "rgba(240, 243, 250, 0)",
+      scaleFontColor: "rgba(106, 109, 120, 1)",
+      belowLineFillColorGrowing: "rgba(41, 98, 255, 0.12)",
+      belowLineFillColorFalling: "rgba(41, 98, 255, 0.12)",
+      belowLineFillColorGrowingBottom: "rgba(41, 98, 255, 0)",
+      belowLineFillColorFallingBottom: "rgba(41, 98, 255, 0)",
+      symbolActiveColor: "rgba(41, 98, 255, 0.12)",
       tabs: [
         {
           title: "Indices",
           symbols: [
             {
-              s: "OANDA:SPX500USD",
+              s: "FOREXCOM:SPXUSD",
               d: "S&P 500",
             },
             {
-              s: "INDEX:XLY0",
-              d: "Shanghai Composite",
+              s: "FOREXCOM:NSXUSD",
+              d: "US 100",
             },
             {
               s: "FOREXCOM:DJI",
@@ -97,25 +106,25 @@ class App extends Component {
               d: "Nikkei 225",
             },
             {
-              s: "INDEX:DAX",
+              s: "INDEX:DEU40",
               d: "DAX Index",
             },
             {
-              s: "OANDA:UK100GBP",
-              d: "FTSE 100",
+              s: "FOREXCOM:UKXGBP",
+              d: "UK 100",
             },
           ],
           originalTitle: "Indices",
         },
         {
-          title: "Commodities",
+          title: "Futures",
           symbols: [
             {
               s: "CME_MINI:ES1!",
-              d: "E-Mini S&P",
+              d: "S&P 500",
             },
             {
-              s: "CME:E61!",
+              s: "CME:6E1!",
               d: "Euro",
             },
             {
@@ -135,7 +144,7 @@ class App extends Component {
               d: "Corn",
             },
           ],
-          originalTitle: "Commodities",
+          originalTitle: "Futures",
         },
         {
           title: "Bonds",
@@ -149,19 +158,19 @@ class App extends Component {
               d: "T-Bond",
             },
             {
-              s: "CBOT:UD1!",
+              s: "CBOT:UB1!",
               d: "Ultra T-Bond",
             },
             {
-              s: "EUREX:GG1!",
+              s: "EUREX:FGBL1!",
               d: "Euro Bund",
             },
             {
-              s: "EUREX:II1!",
+              s: "EUREX:FBTP1!",
               d: "Euro BTP",
             },
             {
-              s: "EUREX:HR1!",
+              s: "EUREX:FGBM1!",
               d: "Euro BOBL",
             },
           ],
@@ -172,21 +181,27 @@ class App extends Component {
           symbols: [
             {
               s: "FX:EURUSD",
+              d: "EUR/USD",
             },
             {
               s: "FX:GBPUSD",
+              d: "GBP/USD",
             },
             {
               s: "FX:USDJPY",
+              d: "USD/JPY",
             },
             {
               s: "FX:USDCHF",
+              d: "USD/CHF",
             },
             {
               s: "FX:AUDUSD",
+              d: "AUD/USD",
             },
             {
               s: "FX:USDCAD",
+              d: "USD/CAD",
             },
           ],
           originalTitle: "Forex",
@@ -249,6 +264,10 @@ class App extends Component {
 
   handleOptionChange = (selectedItems) => {
     this.setState({ selectedItems });
+  };
+
+  handleShowTrend = () => {
+    this.setState({ showTrend: !this.state.showTrend });
   };
 
   render() {
@@ -393,20 +412,29 @@ class App extends Component {
                   </Button>
                 )}
               </Col>
+              <Button onClick={this.handleShowTrend}>
+                {this.state.showTrend == true ? "Hide trend" : "Show trend"}
+              </Button>
             </Row>
           </div>
-          <div className="box effect1 col-sm-6" style={{ textAlign: "center" }}>
+
+          <div
+            className={
+              this.state.showTrend == true
+                ? "box effect1 col-sm-6 show"
+                : "box effect1 col-sm-6 hide"
+            }
+            style={{ textAlign: "center" }}
+          >
             <Row>
               <Col>
                 <Typography>
-                  <Title level={4}> Market Overview Widget</Title>
+                  <Title level={4}> Market Trend</Title>
                 </Typography>
-                Market Overview Widget provides a quick glance at the latest
-                market activity across various sectors.
               </Col>
             </Row>
             <Row>
-              <Col span={16} offset={4}>
+              <Col span={16} offset={0}>
                 <div id="marketgraph">
                   <div className="tradingview-widget-container">
                     <div className="tradingview-widget-container__widget"></div>
