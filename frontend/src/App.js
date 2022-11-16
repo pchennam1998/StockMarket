@@ -270,10 +270,10 @@ class App extends Component {
                         <Divider/>
                     </Typography> */}
             <Row>
-              <Col span={8}>
+              <Col span={16}>
                 <div className="stepsClass">
                   <Steps
-                    direction="vertical"
+                    direction="horizontal"
                     size="small"
                     current={this.state.current}
                   >
@@ -282,22 +282,27 @@ class App extends Component {
                       description="Investment Amount (in $)"
                     />
                     <Step
-                      title="Choose Investment Strategy"
-                      description="Choose upto 2 Strategies"
+                      title="Select Strategy"
+                      description="upto 2 Strategies"
                     />
                     <Step title="Confirm" description="Check Input" />
                   </Steps>
                 </div>
               </Col>
+            </Row>
+            <Row>
               <Col span={16}>
-                <div className="contentClass">
+                <div
+                  className="contentClass"
+                  style={{ marginTop: "60px", marginLeft: "20px" }}
+                >
                   <Form {...formItemLayout}>
                     {(this.state.current === 0 && (
                       <div>
                         <Form.Item
                           validateStatus={this.state.validateNumberStatus}
                           help="Amount should be greater than $5000"
-                          style={{ width: "100%" }}
+                          style={{ width: "120%" }}
                         >
                           <InputNumber
                             placeholder="Enter Amount"
@@ -307,7 +312,7 @@ class App extends Component {
                               `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                             }
                             parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-                            style={{ width: "100%" }}
+                            style={{ width: "180%" }}
                             onChange={this.handleNumberChange}
                           />
                         </Form.Item>
@@ -325,7 +330,7 @@ class App extends Component {
                               placeholder="Investment strategies"
                               value={selectedItems}
                               onChange={this.handleOptionChange}
-                              style={{ width: "100%" }}
+                              style={{ width: "200%" }}
                             >
                               {filteredOptions.map((item) => (
                                 <Select.Option key={item} value={item}>
@@ -369,13 +374,21 @@ class App extends Component {
                 )}
 
                 {!this.state.showSubmit && (
-                  <Button type="primary" onClick={this.handleNext}>
+                  <Button
+                    type="primary"
+                    onClick={this.handleNext}
+                    style={{ backgroundColor: "#284c5a" }}
+                  >
                     Next
                   </Button>
                 )}
 
                 {this.state.showSubmit && (
-                  <Button type="primary" onClick={this.handleSubmit}>
+                  <Button
+                    type="primary"
+                    style={{ backgroundColor: "#284c5a" }}
+                    onClick={this.handleSubmit}
+                  >
                     Submit
                   </Button>
                 )}

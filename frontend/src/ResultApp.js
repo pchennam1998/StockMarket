@@ -96,9 +96,11 @@ class ResultApp extends Component {
                     </Typography> */}
             <Spin tip="Loading..." spinning={this.state.loading}>
               <div>
-                <Text strong>Amount: </Text> <Text>$ {this.state.amount}</Text>
-                <br></br>
-                <div style={{ float: "left" }}>
+                <div>
+                  <Text strong>Amount: </Text>{" "}
+                  <Text>$ {this.state.amount}</Text>
+                </div>
+                <div style={{ float: "right" }}>
                   <Text strong>Strategies: </Text>
                   <Text>{formatedSelectedItems}</Text>
                 </div>
