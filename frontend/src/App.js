@@ -289,7 +289,7 @@ class App extends Component {
                         <Divider/>
                     </Typography> */}
             <Row>
-              <Col span={16}>
+              <Col>
                 <div className="stepsClass">
                   <Steps
                     direction="horizontal"
@@ -310,7 +310,7 @@ class App extends Component {
               </Col>
             </Row>
             <Row>
-              <Col span={16}>
+              <Col>
                 <div
                   className="contentClass"
                   style={{ marginTop: "60px", marginLeft: "20px" }}
@@ -321,7 +321,7 @@ class App extends Component {
                         <Form.Item
                           validateStatus={this.state.validateNumberStatus}
                           help="Amount should be greater than $5000"
-                          style={{ width: "120%" }}
+                          style={{ width: "100%" }}
                         >
                           <InputNumber
                             placeholder="Enter Amount"
@@ -331,7 +331,7 @@ class App extends Component {
                               `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                             }
                             parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-                            style={{ width: "180%" }}
+                            style={{ width: "120%" }}
                             onChange={this.handleNumberChange}
                           />
                         </Form.Item>
@@ -349,7 +349,7 @@ class App extends Component {
                               placeholder="Investment strategies"
                               value={selectedItems}
                               onChange={this.handleOptionChange}
-                              style={{ width: "200%" }}
+                              style={{ width: "120%" }}
                             >
                               {filteredOptions.map((item) => (
                                 <Select.Option key={item} value={item}>
