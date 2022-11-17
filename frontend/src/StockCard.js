@@ -394,28 +394,26 @@ class StockCard extends Component {
     ];
 
     let response = await axios.get(
-      `https://cloud.iexapis.com/v1/stock/${this.props.data.symbol}/chart/5d?token=pk_31638584dd6c4c04a550a33b66e50c33`
+      `https://cloud.iexapis.com/v1/stock/${this.props.data.symbol}/chart/1m?token=pk_31638584dd6c4c04a550a33b66e50c33`
     );
 
     console.log(response.data);
     Modal.success({
-      title: `Stock Details for ${this.props.data.companyName} (${this.props.data.symbol})`,
-      width: 700,
+      title: `${this.props.data.companyName} (${this.props.data.symbol})`,
+      width: 1200,
       content: (
         <div className="tradingview-widget-container" id="stockChart">
           <LineChart
-            width={600}
-            height={200}
+            width={1000}
+            height={400}
             data={response.data}
-            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+            margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="label">
               <Label value="Date" offset={0} position="insideBottom" />
             </XAxis>
-            <YAxis
-              label={{ value: "Price($)", angle: -90, position: "insideLeft" }}
-            />
+            <YAxis label={{ value: "$", angle: -90, position: "insideLeft" }} />
             <Tooltip />
             <Line
               connectNulls={true}
@@ -428,7 +426,7 @@ class StockCard extends Component {
               connectNulls={true}
               type="monotone"
               dataKey="open"
-              stroke="#8884d8"
+              stroke="rgb(11, 21, 26)"
               fill="#8884d8"
             />
           </LineChart>

@@ -128,3 +128,19 @@ footer {
   transition: all 0.25s;
   -webkit-transition: all 0.25s;
 }
+.confirm {
+  background-color: #cbc8c8;
+  padding: 100px;
+  margin-bottom: 40px;
+  color: wheat;
+  text-align: center;
+  border-radius: 20px;
+}
+.ant-btn-primary {
+  color: #fff;
+  background-color: #0a1519 !important;
+  border-color: #0a1519;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+}

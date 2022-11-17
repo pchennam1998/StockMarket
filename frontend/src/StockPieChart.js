@@ -9,12 +9,12 @@ import {
 } from "recharts";
 
 const COLORS = [
-  "#0088FE",
-  "#00C49F",
-  "#FFBB28",
   "#FF8042",
   "#21618C",
   "#F4D03F",
+  "#0088FE",
+  "#00C49F",
+  "#FFBB28",
 ];
 
 const RADIAN = Math.PI / 180;
@@ -49,15 +49,20 @@ export class StockPieChart extends React.Component {
 
   render() {
     return (
-      <PieChart onMouseEnter={this.onPieEnter} width={800} height={700}>
+      <PieChart
+        onMouseEnter={this.onPieEnter}
+        width={700}
+        height={600}
+        style={{ marginTop: "-100px" }}
+      >
         <Pie
           data={this.props.data}
           cx={450}
           cy={350}
           labelLine={false}
           label={this.renderCustomizedLabel}
-          outerRadius={100}
-          fill="#8884d8"
+          outerRadius={180}
+          fill=""
         >
           {this.props.data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />

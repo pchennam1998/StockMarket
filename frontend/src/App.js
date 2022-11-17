@@ -213,16 +213,16 @@ class App extends Component {
 
   handleNext = () => {
     if (this.state.current === 1 && this.state.selectedItems.length > 2) {
-      message.error("Select maximum of 2 Investment strategies");
+      message.error("maximum of 2 Investment strategies can be selected");
       this.setState({ validateOptionStatus: "error" });
     } else if (
       this.state.current === 1 &&
       this.state.selectedItems.length === 0
     ) {
-      message.error("Please select at-least 1 Investment strategy");
+      message.error("Minimum of one strategy should be selected");
       this.setState({ validateOptionStatus: "error" });
     } else if (this.state.current === 0 && this.state.amount < 5000) {
-      message.error("Please select valid amount");
+      message.error("Invalid amount");
     } else {
       this.setState({ validateOptionStatus: "success" });
       let newVal = this.state.current + 1;
@@ -346,13 +346,23 @@ class App extends Component {
                           >
                             <Select
                               mode="multiple"
-                              placeholder="Investment strategies"
+                              placeholder="Select upto two investment strategies"
                               value={selectedItems}
                               onChange={this.handleOptionChange}
-                              style={{ width: "120%" }}
+                              style={{
+                                width: "120%",
+                                backgroundColor: "yellow",
+                              }}
                             >
                               {filteredOptions.map((item) => (
-                                <Select.Option key={item} value={item}>
+                                <Select.Option
+                                  key={item}
+                                  value={item}
+                                  style={{
+                                    color: "white",
+                                    backgroundColor: "rgb(20, 39, 47)",
+                                  }}
+                                >
                                   {item}
                                 </Select.Option>
                               ))}
@@ -361,7 +371,12 @@ class App extends Component {
                         </div>
                       )) ||
                       (this.state.current === 2 && (
-                        <div>
+                        <div className="confirm">
+                          <Text>--------------------------------</Text>
+                          <br />
+                          <Text strong>Selected Details </Text> <br />
+                          <Text>--------------------------------</Text>
+                          <br />
                           <Text strong>Amount: </Text>{" "}
                           <Text>{this.state.amount}</Text>
                           <br />

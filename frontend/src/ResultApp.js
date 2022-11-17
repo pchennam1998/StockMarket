@@ -94,7 +94,10 @@ class ResultApp extends Component {
                         </div>
                         <Divider/>
                     </Typography> */}
-            <Spin tip="Loading..." spinning={this.state.loading}>
+            <Spin
+              tip="Please wait while we process the information for you..."
+              spinning={this.state.loading}
+            >
               <div>
                 <div>
                   <Text strong>Amount: </Text>{" "}
@@ -194,10 +197,7 @@ class ResultApp extends Component {
           </div>
         </div>
         <div>
-          <div className="box effect1">
-            <div style={{ textAlign: "center" }}>
-              <Title level={4}>Graphical Representation</Title>
-            </div>
+          <div className="box effect1" style={{ marginTop: "-40px" }}>
             <StockPieChart data={this.state.piechartResponse} />
           </div>
         </div>
