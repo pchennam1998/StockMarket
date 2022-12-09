@@ -38,6 +38,10 @@ def get_stock_quote(stock_list):
 
     return stock_quote
 
+@app.route('/')
+def hello_world():
+    print "hello world"
+
 @app.route('/getData', methods=['POST'])
 @cross_origin(origin='*')
 def return_data():
