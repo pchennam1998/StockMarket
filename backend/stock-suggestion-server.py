@@ -40,7 +40,7 @@ def get_stock_quote(stock_list):
 
 @app.route('/')
 def hello_world():
-    print "hello world"
+    print ("hello world")
 
 @app.route('/getData', methods=['POST'])
 @cross_origin(origin='*')
@@ -97,5 +97,5 @@ def return_data():
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 8000))
     app.run(host='0.0.0.0', port=port)
